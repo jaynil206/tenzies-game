@@ -1,2 +1,3 @@
 # tenzies-game
-Created with CodeSandbox
+
+simple game practicing useState and useEffect in React
