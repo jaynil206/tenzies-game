@@ -8,7 +8,7 @@ export default function App() {
   // states
   const [tenzies, setTenzies] = React.useState(false);
   const [dice, setDice] = React.useState(generateNewDiceArray());
-
+  const [count, setCount] = React.useState(0); 
   // effect
   React.useEffect(() => {
     const allHeld = dice.every((die) => die.isHeld === true);
@@ -39,9 +39,11 @@ export default function App() {
             : { ...die, value: Math.ceil(Math.random() * 6) };
         });
       });
+      setCount(prevCount => prevCount + 1); 
     } else {
       setDice(generateNewDiceArray());
       setTenzies(false);
+      setCount(0)
     }
   }
 
@@ -68,8 +70,14 @@ export default function App() {
     <div className="App">
       {tenzies && <Confetti />}
       <Header />
+      <div className="description">
+        <p>Roll the dice until all 10 are matching. Click on a die to stop it from rolling.</p>
+      </div>
       <div className="dice--canvas">{diceElements}</div>
-      <button onClick={rollDice}>{tenzies ? "New game" : "Roll again"}</button>
+      <div className="button--canvas">
+        <button onClick={rollDice}>{tenzies ? "New game" : "Roll Dice"}</button>
+        <h2 className="rollCount">{count}</h2>
+      </div>
     </div>
   );
 }
